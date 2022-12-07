@@ -20,3 +20,7 @@
 [root@k8s-master ~]# cd Container-Image-Dockerfile/openjdk-skywalking-agent
 [root@k8s-master openjdk-skywalking-agent]# docker build . -t openjdk:11-jre-slim-buster-skywalking-agent-8.13.0
 ```
+
+## K8s Deployment接入例子  
+### Deployment资源  
+
