@@ -13,3 +13,10 @@
   - 需要配合K8s 编排文件使用。样例：-javaagent:/sidecar/skywalking-agent/skywalking-agent.jar;
 - JAVA_OPTS"
   - 需要配合K8s 编排文件使用。样例：-jar /applications/spring-boot-helloworld.jar --server.port=80;
+
+## 镜像构建
+```
+[root@k8s-master ~]# git clone https://github.com/shaxiaozz/Container-Image-Dockerfile.git
+[root@k8s-master ~]# cd Container-Image-Dockerfile/openjdk-skywalking-agent
+[root@k8s-master openjdk-skywalking-agent]# docker build . -t openjdk:11-jre-slim-buster-skywalking-agent-8.13.0
+```
