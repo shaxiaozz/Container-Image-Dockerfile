@@ -22,5 +22,6 @@
 ```
 
 ## K8s Deployment接入例子  
-### Deployment资源  
+  - ConfigMap资源(/k8s_example/configmap.yaml)
+  - Deployment资源(/k8s_example/deployment.yaml)
 
