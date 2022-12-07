@@ -1,5 +1,5 @@
 ## openjdk skywalking-agent
-将skywalking-agent集成至openjdk镜像中。skywalk-agent相关的内容都存放与镜像中的路径：/sidecar/skywalking-agent \n
+将skywalking-agent集成至openjdk镜像中。skywalk-agent相关的内容都存放与镜像中的路径：/sidecar/skywalking-agent
 因为skywalking-agent的配置文件高度封装系统环境变量，因此我们借助系统环境变量来完成对skywalking-agent的配置。
 
 ## Dockerfile变量声明
