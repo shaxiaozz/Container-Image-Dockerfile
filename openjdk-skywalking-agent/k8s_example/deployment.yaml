@@ -1,0 +1,72 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spring-boot-hello
+  labels:
+    app: spring-boot-hello
+spec:
+  selector:
+    matchLabels:
+      app: spring-boot-hello
+  template:
+    metadata:
+      name: spring-boot-hello
+      labels:
+        app: spring-boot-hello
+    spec:
+      containers:
+        - name: spring-boot-hello
+          image: registry.cn-guangzhou.aliyuncs.com/shaxiaozz/spring-boot-hello:master-20221207-162737
+          ports:
+            - containerPort: 80 # 容器端口
+          envFrom:
+          - configMapRef:
+              name: public-env
+          env:
+          - name: JAVA_OPTS
+            value: "-jar /applications/spring-boot-helloworld.jar --server.port=80"
+          - name: SW_AGENT_NAME
+            value: "spring-boot-hello"
+          resources:
+            limits:
+              cpu: "2" # cpu 限制
+              memory: "2Gi" # 内存限制
+            requests:
+              cpu: "1" # cpu 预留（与限制值一致）
+              memory: "1Gi" # 内存预留（与限制值一致）
+          livenessProbe:
+            httpGet:
+              path: /hello
+              port: 80
+              scheme: HTTP
+            initialDelaySeconds: 40
+            timeoutSeconds: 10
+            periodSeconds: 5
+            successThreshold: 1
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /hello
+              port: 80
+              scheme: HTTP
+            initialDelaySeconds: 40
+            timeoutSeconds: 10
+            periodSeconds: 5
+            successThreshold: 1
+            failureThreshold: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: spring-boot-hello
+spec:
+  type: NodePort
+  ports:
+    - port: 80 # 服务端口
+  selector:
+    app: spring-boot-hello

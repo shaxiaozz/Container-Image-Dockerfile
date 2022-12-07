@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: public-env
+data:
+  SW_AGENT_NAMESPACE: "default"
+  SW_AGENT_COLLECTOR_BACKEND_SERVICES: "skywalking-oap-svc:11800"
+  AGENT_OPTS: "-javaagent:/sidecar/skywalking-agent/skywalking-agent.jar"
